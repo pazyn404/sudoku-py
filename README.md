@@ -17,7 +17,7 @@ python -m pip install -r requirements.txt
 * validate puzzle
 * check if puzzle is correct, has only one solution
 * assess complexity of puzzle
-* can be easily modified to solve sudoku of any sizes (change Sudoku Config N and M values)
+* can be easily modified to solve sudoku of any sizes (change SudokuConfig N and M values)
 * get solution
 * integration tests
 * commented code

@@ -1,8 +1,8 @@
 from copy import deepcopy
 
-from algorithms.enumerator import Enumerator
-from algorithms.sudoku_config import SudokuConfig
-from algorithms.sudoku_cell import SudokuCell
+from data_structures.enumerator import Enumerator
+from sudoku.config import SudokuConfig
+from sudoku.cell import SudokuCell
 
 
 class SudokuSolver:

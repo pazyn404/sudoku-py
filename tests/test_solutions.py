@@ -1,6 +1,6 @@
 import pytest
 
-from algorithms.sudoku import Sudoku
+from sudoku.sudoku import Sudoku
 
 grid = [
     [0, 4, 0, 0, 3, 0, 8, 0, 7],

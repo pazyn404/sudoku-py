@@ -1,5 +1,5 @@
-from algorithms.sudoku_config import SudokuConfig
-from algorithms.sudoku_cell import SudokuCell
+from sudoku.config import SudokuConfig
+from sudoku.cell import SudokuCell
 
 
 class SudokuValidator:
