@@ -16,6 +16,9 @@ class SudokuSolver:
         self._complexity = 0
         self._fill_possibles()
 
+    '''
+    Fill all possible values for cells
+    '''
     def _fill_possibles(self) -> None:
         for i in range(SudokuConfig.N):
             for j in range(SudokuConfig.N):
@@ -41,12 +44,18 @@ class SudokuSolver:
                         if grid_value in self._possibles[cell]:
                             self._possibles[cell].remove(grid_value)
 
+    '''
+    Solve puzzle and check if it has only one solution
+    '''
     def solve(self) -> None:
         if not self._find_solution():
             raise Exception("No solution")
         if not self._check_unique_solution():
             raise Exception("Multiple solutions")
 
+    '''
+    Find any puzzle solution, assess complexity of puzzle
+    '''
     def _find_solution(self) -> bool:
         while self._filled_cells_count != SudokuConfig.N ** 2:
             min_cell = self._find_min_cell()
@@ -79,9 +88,15 @@ class SudokuSolver:
 
         return True
 
+    '''
+    Find cell with minimum number of candidates
+    '''
     def _find_min_cell(self) -> SudokuCell:
         return min(self._empty_cells, key=lambda x: len(self._possibles[x]))
 
+    '''
+    Delete cell value from all empty related cells
+    '''
     def _modify(self, cell: SudokuCell) -> None:
         grid_value = self._grid[cell.i][cell.j]
         i = cell.i
@@ -117,11 +132,19 @@ class SudokuSolver:
                             )
                         )
 
+    '''
+    Add value back to possibles of all modified cells
+    '''
     def _back(self, cell: SudokuCell) -> None:
         while self._modified and self._modified[-1][0] == cell:
             self._possibles[self._modified[-1][1][0]].append(self._modified[-1][1][1])
             self._modified.pop()
 
+    '''
+    The main idea - we have stack of states created by _find_solution, 
+    we unwrap this in the next way - try to change the cell value from current to next and try to find solution of new one,
+    if there is no other possible value for cell then cell is set up as empty and the process is repeated.
+    '''
     def _check_unique_solution(self) -> bool:
         grid = deepcopy(self._grid)
         self._states.reverse()

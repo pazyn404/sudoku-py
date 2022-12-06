@@ -9,10 +9,17 @@ class SudokuValidator:
         self._validate_cells()
         self._validate_conflicts()
 
+    '''
+    Public method to validate grid
+    '''
     def validate(self) -> None:
         self._validate_cells()
         self._validate_conflicts()
 
+    '''
+    Check if all values is instances of type int and in correct range
+    0 - empty cell
+    '''
     def _validate_cells(self) -> None:
         for i in range(SudokuConfig.N):
             for j in range(SudokuConfig.N):
@@ -21,6 +28,9 @@ class SudokuValidator:
                 if not 0 <= self._grid[i][j] <= SudokuConfig.N:
                     raise ValueError(f"Cell value should be in range (1, {SudokuConfig.N}), cell: {SudokuCell(i, j)}")
 
+    '''
+    Check if there is no row, column, square with two or more same values inside
+    '''
     def _validate_conflicts(self) -> None:
         rows = [{} for _ in range(SudokuConfig.N)]
         columns = [{} for _ in range(SudokuConfig.N)]

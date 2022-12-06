@@ -3,6 +3,9 @@ from time import time
 from algorithms.sudoku import Sudoku
 from algorithms.sudoku_validator import SudokuValidator
 
+'''
+Levels from local newspaper :)
+'''
 
 def level1():
     s = Sudoku(
@@ -19,7 +22,6 @@ def level1():
         ]
     )
     s.solve()
-    SudokuValidator(s.solution).validate()
     print(f"level 1, complexity {s.complexity}")
 
 
@@ -38,7 +40,6 @@ def level2():
         ]
     )
     s.solve()
-    SudokuValidator(s.solution).validate()
     print(f"level 2, complexity {s.complexity}")
 
 
@@ -57,7 +58,6 @@ def level3():
         ]
     )
     s.solve()
-    SudokuValidator(s.solution).validate()
     print(f"level 3, complexity {s.complexity}")
 
 
@@ -76,7 +76,6 @@ def level4():
         ]
     )
     s.solve()
-    SudokuValidator(s.solution).validate()
     print(f"level 4, complexity {s.complexity}")
 
 
@@ -95,7 +94,6 @@ def level5():
         ]
     )
     s.solve()
-    SudokuValidator(s.solution).validate()
     print(f"level 5, complexity {s.complexity}")
 
 
@@ -114,7 +112,6 @@ def level6():
         ]
     )
     s.solve()
-    SudokuValidator(s.solution).validate()
     print(f"level 6, complexity {s.complexity}")
 
 
@@ -133,7 +130,6 @@ def level7():
         ]
     )
     s.solve()
-    SudokuValidator(s.solution).validate()
     print(f"level 7, complexity {s.complexity}")
 
 
@@ -152,7 +148,6 @@ def level8():
         ]
     )
     s.solve()
-    SudokuValidator(s.solution).validate()
     print(f"level 8, complexity {s.complexity}")
 
 
@@ -171,7 +166,6 @@ def level9():
         ]
     )
     s.solve()
-    SudokuValidator(s.solution).validate()
     print(f"level 9, complexity {s.complexity}")
 
 
@@ -190,7 +184,6 @@ def level10():
         ]
     )
     s.solve()
-    SudokuValidator(s.solution).validate()
     print(f"level 10, complexity {s.complexity}")
 
 
@@ -209,7 +202,6 @@ def level11():
         ]
     )
     s.solve()
-    SudokuValidator(s.solution).validate()
     print(f"level 11, complexity {s.complexity}")
 
 
@@ -228,7 +220,6 @@ def level12():
         ]
     )
     s.solve()
-    SudokuValidator(s.solution).validate()
     print(f"level 12, complexity {s.complexity}")
 
 
@@ -248,4 +239,4 @@ level11()
 level12()
 
 end_time = time()
-print(f"passed in {end_time - start_time}")
+print(f"Passed in {end_time - start_time}")
