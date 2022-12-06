@@ -4,6 +4,7 @@
 
 ```
 git clone https://github.com/pazyn404/sudoku-py.git
+cd sudoku-py
 python -m venv venv
 (
     venv\Scripts\Activate - Windows
