@@ -1,6 +1,6 @@
 import pytest
 
-from algorithms.sudoku import Sudoku
+from sudoku.sudoku import Sudoku
 
 multiple_solutions_grids = [
     [

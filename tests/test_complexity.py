@@ -1,11 +1,11 @@
 from time import time
 
-from algorithms.sudoku import Sudoku
-from algorithms.sudoku_validator import SudokuValidator
+from sudoku.sudoku import Sudoku
 
 '''
 Levels from local newspaper :)
 '''
+
 
 def level1():
     s = Sudoku(

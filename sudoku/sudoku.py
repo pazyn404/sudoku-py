@@ -1,7 +1,7 @@
 from copy import deepcopy
 
-from algorithms.sudoku_solver import SudokuSolver
-from algorithms.sudoku_validator import SudokuValidator
+from sudoku.solution import SudokuSolver
+from sudoku.validation import SudokuValidator
 
 
 class Sudoku:
