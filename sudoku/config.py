@@ -1,6 +1,13 @@
+from enum import Enum
+
+
+class Option(Enum):
+    ANY = 1
+    UNIQUE = 2
+    ALL = 3
+
+
 class SudokuConfig:
-    '''
-    Change N and M to solve sudoku of needed size (M = sqrt(N) - should be integer)
-    '''
     N = 9
     M = 3
+    OPTION = Option.UNIQUE

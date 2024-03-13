@@ -31,4 +31,4 @@ solution = [
 def test_eval(grid, solution):
     s = Sudoku(grid)
     s.solve()
-    assert s.solution == solution
+    assert s.solutions[0] == solution
