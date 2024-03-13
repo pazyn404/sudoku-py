@@ -22,5 +22,5 @@ class SudokuCell:
             return False
         return other._i == self._i and other._j == self._j
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         return f"({self._i}, {self._j})"
