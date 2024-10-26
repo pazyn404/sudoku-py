@@ -5,8 +5,6 @@ from sudoku.cell import SudokuCell
 class SudokuValidator:
     def __init__(self, grid: list[list[int]]) -> None:
         self._grid: list[list[int]] = grid
-        self._validate_cells()
-        self._validate_conflicts()
 
     def validate(self) -> None:
         self._validate_cells()

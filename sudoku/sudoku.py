@@ -7,10 +7,10 @@ class Sudoku:
         self._validator = SudokuValidator(grid)
         self._solver = SudokuSolver(grid)
 
-    def solve(self):
+    def solve(self) -> None:
         self._validator.validate()
         self._solver.solve()
 
     @property
-    def solutions(self):
+    def solutions(self) -> list[list[list[int]]]:
         return self._solver.solutions
