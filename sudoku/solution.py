@@ -14,7 +14,53 @@ class SudokuSolver:
         self._modified: list[tuple[SudokuCell, tuple[SudokuCell, int]]] = []
         self._empty_cells: list[SudokuCell] = []
         self._filled_cells_count: int = 0
+
+    def solve(self) -> None:
+        N = SudokuConfig.N
+        OPTION = SudokuConfig.OPTION
+
         self._fill_possibles()
+        empty_states = False
+        while not empty_states:
+            min_cell = self._find_min_cell()
+            cell_possibles = self._possibles[min_cell]
+            backward = False
+            if len(cell_possibles):
+                self._empty_cells.remove(min_cell)
+                self._states.append((min_cell, Enumerator(cell_possibles)))
+                self._states[-1][1].move_next()
+                self._grid[min_cell.i][min_cell.j] = self._states[-1][1].current
+                self._modify(min_cell)
+                self._filled_cells_count += 1
+                if self._filled_cells_count == N ** 2:
+                    self._solutions.append(deepcopy(self._grid))
+                    if OPTION == Option.UNIQUE and len(self._solutions) > 1:
+                        self._solutions = []
+                        raise Exception("Multiple solutions")
+                    if OPTION == Option.ANY:
+                        return
+                    backward = True
+            else:
+                backward = True
+            if backward:
+                stop = False
+                while not stop:
+                    if not self._states:
+                        empty_states = True
+                        break
+                    self._back(self._states[-1][0])
+                    if self._states[-1][1].move_next():
+                        self._grid[self._states[-1][0].i][self._states[-1][0].j] = self._states[-1][1].current
+                        self._modify(self._states[-1][0])
+                        stop = True
+                    else:
+                        self._empty_cells.append(self._states[-1][0])
+                        self._grid[self._states[-1][0].i][self._states[-1][0].j] = 0
+                        self._states.pop()
+                        self._filled_cells_count -= 1
+
+        if not self._solutions:
+            raise Exception("No solutions")
 
     def _fill_possibles(self) -> None:
         N = SudokuConfig.N
@@ -43,49 +89,6 @@ class SudokuSolver:
                         grid_value = self._grid[(i // M) * M + _i][(j // M) * M + _j]
                         if grid_value in self._possibles[cell]:
                             self._possibles[cell].remove(grid_value)
-
-    def solve(self) -> None:
-        empty_states = False
-        while not empty_states:
-            min_cell = self._find_min_cell()
-            cell_possibles = self._possibles[min_cell]
-            backward = False
-            if len(cell_possibles):
-                self._empty_cells.remove(min_cell)
-                self._states.append((min_cell, Enumerator(cell_possibles)))
-                self._states[-1][1].move_next()
-                self._grid[min_cell.i][min_cell.j] = self._states[-1][1].current
-                self._modify(min_cell)
-                self._filled_cells_count += 1
-                if self._filled_cells_count == SudokuConfig.N ** 2:
-                    self._solutions.append(deepcopy(self._grid))
-                    if SudokuConfig.OPTION == Option.UNIQUE and len(self._solutions) > 1:
-                        self._solutions = []
-                        raise Exception("Multiple solutions")
-                    if SudokuConfig.OPTION == Option.ANY:
-                        return
-                    backward = True
-            else:
-                backward = True
-            if backward:
-                stop = False
-                while not stop:
-                    if not self._states:
-                        empty_states = True
-                        break
-                    self._back(self._states[-1][0])
-                    if self._states[-1][1].move_next():
-                        self._grid[self._states[-1][0].i][self._states[-1][0].j] = self._states[-1][1].current
-                        self._modify(self._states[-1][0])
-                        stop = True
-                    else:
-                        self._empty_cells.append(self._states[-1][0])
-                        self._grid[self._states[-1][0].i][self._states[-1][0].j] = 0
-                        self._states.pop()
-                        self._filled_cells_count -= 1
-
-        if not self._solutions:
-            raise Exception("No solutions")
 
     def _find_min_cell(self) -> SudokuCell:
         return min(self._empty_cells, key=lambda x: len(self._possibles[x]))
